@@ -29,7 +29,8 @@ import (
 )
 
 const (
-	asciidocAnchorPrefix = "{anchor_prefix}-"
+	asciidocAnchorPrefix      = "{anchor_prefix}-"
+	asciidocDefaultOutputFile = "out.asciidoc"
 )
 
 type AsciidoctorRenderer struct {
@@ -53,13 +54,18 @@ func (adr *AsciidoctorRenderer) Render(gvd []types.GroupVersionDetails) error {
 	}
 
 	outputFile := adr.conf.OutputPath
+
+	if outputFile == "" {
+		outputFile = asciidocDefaultOutputFile
+	}
+
 	finfo, err := os.Stat(outputFile)
 	if err != nil && !os.IsNotExist(err) {
 		return err
 	}
 
 	if finfo != nil && finfo.IsDir() {
-		outputFile = filepath.Join(outputFile, "out.asciidoc")
+		outputFile = filepath.Join(outputFile, asciidocDefaultOutputFile)
 	}
 
 	f, err := os.Create(outputFile)

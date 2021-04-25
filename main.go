@@ -44,7 +44,7 @@ func main() {
 	cmd.Flags().StringVar(&args.SourcePath, "source-path", "", "Path to source directory containing CRDs")
 	cmd.Flags().StringVar(&args.TemplatesDir, "templates-dir", "templates", "Path to the directory containing template files")
 	cmd.Flags().StringVar(&args.Renderer, "renderer", "asciidoctor", "Renderer to use")
-	cmd.Flags().StringVar(&args.OutputPath, "output-path", "out.asciidoc", "Path to output the rendered result")
+	cmd.Flags().StringVar(&args.OutputPath, "output-path", "", "Path to output the rendered result")
 	cmd.Flags().IntVar(&args.MaxDepth, "max-depth", 6, "Maximum recursion level for type discovery")
 
 	cmd.Execute()
